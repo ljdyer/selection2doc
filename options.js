@@ -26,3 +26,14 @@ function restore_options() {
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click',
     save_options);
+
+function wikipedia(){
+  document.getElementById('idList').value = "firstHeading,toc";
+}
+
+function clear(){
+  document.getElementById('idList').value = "";
+}
+
+document.getElementById('clear').addEventListener('click', clear);
+document.getElementById('wikipedia').addEventListener('click', wikipedia);
