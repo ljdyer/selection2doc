@@ -22,10 +22,6 @@ function getAllText(storageItems){
 
 function getElementText(elementId){
   let elementText = $(`#${elementId}`).text();
-  // console.log("====================");
-  // console.log(`ID: ${elementId}`);
-  // console.log($(`#${elementId}`).text());
-  // console.log("====================");
   return elementText;
 }
 
@@ -48,8 +44,6 @@ function intersperse(array, seperator){
 function trimString(string){
   return string.trim();
 }
-
-
 
 function makeDoc(allText){
   let paragraphs = allText.map(paragraphFromText);
@@ -83,7 +77,6 @@ function paragraphFromText(text){
 
 function countChars(text){
   let charCounts = text.map(removeSpaces).map(getStringLength);
-  // console.log(charCounts);
   let totalCharCount = charCounts.reduce((a, b) => a + b, 0);
   return totalCharCount;
 }
@@ -104,8 +97,7 @@ function generateFilename(charCount){
 function getFormattedTime(){
   var today = new Date();
   var y = today.getFullYear();
-  // JavaScript months are 0-based.
-  var m = today.getMonth() + 1;
+  var m = today.getMonth() + 1; // JavaScript months are 0-based.
   var d = today.getDate();
   var h = today.getHours();
   var mi = today.getMinutes();
