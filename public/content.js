@@ -36,7 +36,6 @@ function splitByLineBreak(text){
 }
 
 function intersperse(array, seperator){
-  console.log(array);
   result = array.flatMap(e => [seperator,e]).slice(1);
   return result;
 }
@@ -47,7 +46,6 @@ function trimString(string){
 
 function makeDoc(allText){
   let paragraphs = allText.map(paragraphFromText);
-  let charCount = countChars(allText);
 
   const doc = new docx.Document({
     sections: [
@@ -60,7 +58,7 @@ function makeDoc(allText){
 
   docx.Packer.toBlob(doc).then((blob) => {
     console.log(blob);
-    let filename = generateFilename(charCount);
+    let filename = generateFilename();
     saveAs(blob, filename);
     console.log("Document created successfully");
   });
@@ -75,22 +73,9 @@ function paragraphFromText(text){
   return result;
 }
 
-function countChars(text){
-  let charCounts = text.map(removeSpaces).map(getStringLength);
-  let totalCharCount = charCounts.reduce((a, b) => a + b, 0);
-  return totalCharCount;
-}
-
-function removeSpaces(string){
-  return string.replace(" ", "");
-}
-
-function getStringLength(string){
-  return string.length;
-}
-
-function generateFilename(charCount){
-  let filename = `${document.title} ${getFormattedTime()} (${charCount} characters).docx`;
+function generateFilename(){
+  let docTitle = document.title;
+  let filename = `${docTitle.substring(0,10)} ${getFormattedTime()}.docx`;
   return filename;
 }
 
