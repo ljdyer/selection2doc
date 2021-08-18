@@ -1,7 +1,7 @@
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if( request.message === "clicked_browser_action" ) {
-      chrome.storage.sync.get({
+      browser.storage.local.get({
         idList: ""
       }, getAllText);
     }
@@ -10,18 +10,16 @@ chrome.runtime.onMessage.addListener(
 
 function getAllText(storageItems){
   let list = storageItems.idList;
-
   let elementIds = splitAndTrim(list);
   let elementText = elementIds.map(getElementText);
   let elementTextWithBlankLines = intersperse(elementText, "");
   let lines = elementTextWithBlankLines.map(splitByLineBreak).flat();
 
-  console.log(lines);
   makeDoc(lines);
 }
 
 function getElementText(elementId){
-  let elementText = $(`#${elementId}`).text();
+  let elementText = $(`#${elementId}`).text().trim();
   return elementText;
 }
 
