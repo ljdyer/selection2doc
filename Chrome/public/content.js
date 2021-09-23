@@ -1,47 +1,18 @@
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if( request.message === "clicked_browser_action" ) {
-      chrome.storage.sync.get({
-        idList: ""
-      }, getAllText);
+      getSelectionText();
     }
   }
 );
 
-function getAllText(storageItems){
-  let list = storageItems.idList;
+function getSelectionText(){
 
-  let elementIds = splitAndTrim(list);
-  let elementText = elementIds.map(getElementText);
-  let elementTextWithBlankLines = intersperse(elementText, "");
-  let lines = elementTextWithBlankLines.map(splitByLineBreak).flat();
+  let selectionText = window.getSelection().toString().trim();
+  let lines = selectionText.split("\n");
 
   console.log(lines);
   makeDoc(lines);
-}
-
-function getElementText(elementId){
-  let elementText = $(`#${elementId}`).text().trim();
-  return elementText;
-}
-
-function splitAndTrim(commaList){
-  result = commaList.split(",").map(trimString);
-  return result;
-}
-
-function splitByLineBreak(text){
-  let result = text.split("\n");
-  return result;
-}
-
-function intersperse(array, seperator){
-  result = array.flatMap(e => [seperator,e]).slice(1);
-  return result;
-}
-
-function trimString(string){
-  return string.trim();
 }
 
 function makeDoc(allText){

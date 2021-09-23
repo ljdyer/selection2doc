@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "DOM2DOC",
-  "version": "0.0.0.3",
+  "name": "Selection2Doc",
+  "version": "0.0.0.1",
   "background": {
     "scripts": ["background.js"]
   },
@@ -18,9 +18,6 @@
       ]
     }
   ],
-  "permissions": [
-    "storage"
-  ],
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
@@ -28,9 +25,5 @@
   },
   "browser_action": {
     "default_icon": "icon16.png"
-  },
-  "options_ui": {
-    "page": "options.html",
-    "open_in_tab": false
   }
 }
